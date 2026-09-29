@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Registrations;
 
+use App\Filament\Resources\Registrations\Actions\ExportRegistrationReportAction;
 use App\Filament\Resources\Registrations\Pages\EditRegistration;
 use App\Filament\Resources\Registrations\Pages\ListRegistrations;
 use App\Filament\Resources\Registrations\Pages\ViewRegistration;
@@ -45,7 +46,10 @@ class RegistrationResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return RegistrationsTable::configure($table);
+        return RegistrationsTable::configure($table)
+            ->headerActions([
+                ExportRegistrationReportAction::make(),
+            ]);
     }
 
     public static function getRelations(): array
