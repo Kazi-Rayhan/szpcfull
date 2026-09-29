@@ -54,35 +54,8 @@
           <p class="mt-6 text-sm text-gray-100 border border-neon/30 rounded-lg px-4 py-3 bg-neon/10">{{ session('payment_message') }}</p>
         @endif
 
-        @if ($isIthq)
-          @include('partials.ithq-bkash-instructions', [
-            'referenceCode' => $reg['reference_code'],
-            'feeAmount' => config('services.contest_payment.fees.ITHQ-2026'),
-          ])
-
-          <form
-            method="post"
-            action="{{ route('payment.transaction', $reg['reference_code']) }}"
-            class="mt-6 border border-white/10 rounded-lg p-5 bg-surface/40"
-            data-testid="payment-transaction-form"
-          >
-            @csrf
-            <label for="payment_transaction_id" class="register-panel field-label block mb-2">bKash transaction ID</label>
-            <input
-              type="text"
-              name="payment_transaction_id"
-              id="payment_transaction_id"
-              class="register-panel field-input w-full"
-              placeholder="e.g. 8N90ABCD12"
-              value="{{ old('payment_transaction_id') }}"
-              required
-              autocomplete="off"
-            />
-            @error('payment_transaction_id')
-              <p class="mt-2 text-sm text-red-300">{{ $message }}</p>
-            @enderror
-            <button type="submit" class="mt-4 w-full sm:w-auto bg-neon text-black font-bold py-3 px-6 text-sm rounded-lg btn-hard">Submit transaction ID</button>
-          </form>
+        @if ($registration?->supportsBkashSelfPay())
+          @include('partials.payment-submit-form', ['registration' => $registration])
 
           <p class="mt-6 text-sm text-dim leading-relaxed">
             You can return anytime to check verification status:

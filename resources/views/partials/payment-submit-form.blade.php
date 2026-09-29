@@ -2,6 +2,7 @@
   @include('partials.ithq-bkash-instructions', [
     'referenceCode' => $registration->reference_code,
     'feeAmount' => $registration->contestFeeAmount(),
+    'contestLabel' => $registration->contest_type->value,
   ])
 
   @if ($registration->payment_transaction_id)

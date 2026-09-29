@@ -395,7 +395,7 @@
         </div>
         <div class="faq-item reveal" data-testid="faq-item-3" style="--d:.1s">
           <button class="faq-q" data-testid="faq-question-3"><span><span class="text-neon mr-3">&gt;</span>How much is the registration fee?</span><span class="faq-icon">+</span></button>
-          <div class="faq-a"><p>SZPC-2026: ৳1,000 per team · JPC-2026: ৳500 per team · ITHQ-2026: ৳100 per person. After submitting the form, the registration committee (UGV Programming Club) contacts you with payment instructions.</p></div>
+          <div class="faq-a"><p>SZPC-2026: ৳1,000 per team · JPC-2026: ৳500 per team · ITHQ-2026: ৳100 per person. After you register, send the fee by bKash and submit the transaction ID on the payment page. The committee verifies it before your spot is confirmed.</p></div>
         </div>
         <div class="faq-item reveal" data-testid="faq-item-4" style="--d:.15s">
           <button class="faq-q" data-testid="faq-question-4"><span><span class="text-neon mr-3">&gt;</span>Is there an online qualifier?</span><span class="faq-icon">+</span></button>

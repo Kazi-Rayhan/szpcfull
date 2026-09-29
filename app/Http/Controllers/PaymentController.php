@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ContestType;
 use App\Http\Requests\LookupPaymentRequest;
 use App\Http\Requests\SubmitPaymentTransactionRequest;
 use App\Models\Registration;
@@ -54,9 +53,9 @@ class PaymentController extends Controller
         $code = strtoupper(trim($reference_code));
         $registration = Registration::where('reference_code', $code)->firstOrFail();
 
-        if ($registration->contest_type !== ContestType::Ithq) {
+        if (! $registration->supportsBkashSelfPay()) {
             return back()->withErrors([
-                'payment_transaction_id' => 'Online bKash payment with transaction ID is only available for ITHQ-2026. Other contests are contacted by the registration committee.',
+                'payment_transaction_id' => 'Online bKash payment is not available for this registration.',
             ]);
         }
 

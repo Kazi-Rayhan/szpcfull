@@ -1,10 +1,11 @@
 @php
-  $bkashNumber = config('services.contest_payment.ithq_bkash_number');
-  $bkashLabel = config('services.contest_payment.ithq_bkash_label');
+  $bkashNumber = config('services.contest_payment.bkash_number', config('services.contest_payment.ithq_bkash_number'));
+  $bkashLabel = config('services.contest_payment.bkash_label', config('services.contest_payment.ithq_bkash_label'));
   $fee = $feeAmount ?? 100;
+  $contestLabel = $contestLabel ?? 'registration';
 @endphp
-<div class="mt-8 border border-neon/35 rounded-lg p-5 bg-surface/60" data-testid="ithq-bkash-instructions">
-  <p class="text-neon text-sm font-medium mb-3">Pay registration fee (ITHQ-2026)</p>
+<div class="mt-8 border border-neon/35 rounded-lg p-5 bg-surface/60" data-testid="bkash-instructions">
+  <p class="text-neon text-sm font-medium mb-3">Pay registration fee ({{ $contestLabel }})</p>
   <ol class="text-sm text-gray-200 space-y-2 list-decimal list-inside leading-relaxed">
     <li>Open bKash and send <strong class="text-neon">৳{{ number_format($fee) }}</strong> to <strong class="font-mono text-neon">{{ $bkashNumber }}</strong> ({{ $bkashLabel }}).</li>
     <li>In the payment reference / note field, enter your registration code: <strong class="font-mono text-neon">{{ $referenceCode }}</strong>.</li>

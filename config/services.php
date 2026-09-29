@@ -55,6 +55,8 @@ return [
     ],
 
     'contest_payment' => [
+        'bkash_number' => env('BKASH_NUMBER', env('ITHQ_BKASH_NUMBER', '01703436278')),
+        'bkash_label' => env('BKASH_LABEL', env('ITHQ_BKASH_LABEL', 'personal')),
         'ithq_bkash_number' => env('ITHQ_BKASH_NUMBER', '01703436278'),
         'ithq_bkash_label' => env('ITHQ_BKASH_LABEL', 'personal'),
         'fees' => [

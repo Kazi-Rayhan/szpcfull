@@ -35,7 +35,9 @@ class RegistrationController extends Controller
 
         return view('registration-success', [
             'reg' => $reg,
-            'isIthq' => ($reg['contest_type'] ?? '') === ContestType::Ithq->value,
+            'registration' => Registration::query()
+                ->where('reference_code', $reg['reference_code'])
+                ->first(),
             'seoPage' => 'success',
         ]);
     }

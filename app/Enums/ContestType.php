@@ -16,4 +16,11 @@ enum ContestType: string
             self::Ithq => 'ITHQ-2026 (Quiz)',
         };
     }
+
+    public function supportsBkashSelfPay(): bool
+    {
+        return match ($this) {
+            self::Szpc, self::Jpc, self::Ithq => true,
+        };
+    }
 }
