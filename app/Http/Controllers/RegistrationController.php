@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ContestType;
 use App\Http\Requests\StoreRegistrationRequest;
 use App\Models\Registration;
+use App\Models\SiteSetting;
 use App\Services\MessagingService;
 use App\Services\TeamProvisioner;
 use Illuminate\Http\RedirectResponse;
@@ -44,6 +45,12 @@ class RegistrationController extends Controller
 
     public function store(StoreRegistrationRequest $request): RedirectResponse
     {
+        if (! SiteSetting::current()->registrationIsOpen()) {
+            return redirect()
+                ->route('register')
+                ->withErrors(['registration' => 'Registration is closed.']);
+        }
+
         $data = $request->validated();
         $contest = ContestType::from($data['contest_type']);
 

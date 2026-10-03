@@ -124,7 +124,7 @@ const SEGMENTS = {
   },
 };
 
-const routes = window.SZPC_ROUTES || { home: '/', homeSegments: '/#segments', register: '/register' };
+const routes = window.SZPC_ROUTES || { home: '/', homeSegments: '/#segments', register: '/register', registrationOpen: true };
 const params = new URLSearchParams(window.location.search);
 const key = params.get('s') || 'szpc';
 const seg = SEGMENTS[key];
@@ -188,7 +188,9 @@ if (!seg) {
           </div>
 
           <div class="reveal mt-14 flex flex-wrap items-center gap-5" style="--d:.5s">
-            <a href="${routes.register}?c=${key}" data-testid="detail-register-button" class="bg-neon text-black font-bold px-8 py-4 text-sm tracking-[0.2em] btn-hard">REGISTER FOR THIS CONTEST</a>
+            ${routes.registrationOpen === false
+              ? '<p data-testid="detail-registration-closed" class="text-sm tracking-[0.15em] text-dim">REGISTRATION IS CLOSED</p>'
+              : `<a href="${routes.register}?c=${key}" data-testid="detail-register-button" class="bg-neon text-black font-bold px-8 py-4 text-sm tracking-[0.2em] btn-hard">REGISTER FOR THIS CONTEST</a>`}
             <a href="${routes.homeSegments}" data-testid="detail-all-contests-link" class="border border-white/20 px-8 py-4 text-sm tracking-[0.2em] text-gray-200 hover:border-cyber hover:text-cyber transition-colors duration-300">← ALL CONTESTS</a>
           </div>
         </div>

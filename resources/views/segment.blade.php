@@ -45,6 +45,7 @@
       home: @json(route('home')),
       homeSegments: @json(route('home').'#segments'),
       register: @json(route('register')),
+      registrationOpen: @json($siteSettings->registrationIsOpen()),
     };
   </script>
   <script src="{{ asset('js/segment.js') }}?v={{ filemtime(public_path('js/segment.js')) }}"></script>

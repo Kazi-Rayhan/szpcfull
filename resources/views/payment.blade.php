@@ -23,7 +23,9 @@
         <span class="font-display font-800 tracking-widest text-sm">SZPC<span class="text-neon">'26</span></span>
       </a>
       <div class="flex items-center gap-6">
-        <a href="{{ route('register') }}" class="border border-white/20 px-5 py-2 text-xs tracking-[0.2em] text-gray-200 hover:border-neon hover:text-neon transition-colors duration-300">REGISTER</a>
+        @if ($siteSettings->registrationIsOpen())
+          <a href="{{ route('register') }}" class="border border-white/20 px-5 py-2 text-xs tracking-[0.2em] text-gray-200 hover:border-neon hover:text-neon transition-colors duration-300">REGISTER</a>
+        @endif
       </div>
     </div>
   </header>
@@ -34,7 +36,10 @@
       <div class="register-panel border border-neon/40 bg-panel/80 backdrop-blur p-8 sm:p-10">
         <p class="text-neon text-sm font-medium mb-2">Payment &amp; status</p>
         <h1 class="font-display font-800 text-2xl sm:text-3xl tracking-tight mb-4">Track your registration</h1>
-        <p class="text-sm text-dim leading-relaxed mb-8">Enter the reference code from your registration confirmation email or success page to view progress and submit payment details.</p>
+        <p class="text-sm text-dim leading-relaxed mb-8">Enter the reference code from your registration confirmation to view progress@if ($siteSettings->paymentIsOpen()) and submit payment details@endif.</p>
+        @if (! $siteSettings->paymentIsOpen())
+          <p class="mb-6 text-sm text-gray-200 border border-white/15 rounded-lg px-4 py-3 bg-surface/40" data-testid="payment-closed-notice">Online payment is closed. You can still look up your registration status.</p>
+        @endif
 
         <form method="post" action="{{ route('payment.lookup') }}" class="space-y-4" data-testid="payment-lookup-form">
           @csrf

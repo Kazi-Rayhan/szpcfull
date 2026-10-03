@@ -48,8 +48,12 @@
         <a href="#faq" data-testid="nav-link-faq" class="nav-anchor nav-link">FAQ</a>
       </nav>
       <div class="flex items-center gap-3 sm:gap-4">
-        <a href="{{ route('payment') }}" data-testid="nav-payment-verify-btn" class="hidden sm:inline-block border border-white/25 px-4 py-2 text-xs tracking-[0.15em] text-gray-200 hover:border-neon hover:text-neon transition-colors duration-300">VERIFY PAYMENT</a>
-        <a href="{{ route('register') }}" data-testid="nav-register-btn" class="nav-anchor hidden sm:inline-block border border-neon text-neon px-5 py-2 text-xs tracking-[0.2em] hover:bg-neon hover:text-black transition-colors duration-300 btn-hard">REGISTER</a>
+        @if ($siteSettings->paymentIsOpen())
+          <a href="{{ route('payment') }}" data-testid="nav-payment-verify-btn" class="hidden sm:inline-block border border-white/25 px-4 py-2 text-xs tracking-[0.15em] text-gray-200 hover:border-neon hover:text-neon transition-colors duration-300">VERIFY PAYMENT</a>
+        @endif
+        @if ($siteSettings->registrationIsOpen())
+          <a href="{{ route('register') }}" data-testid="nav-register-btn" class="nav-anchor hidden sm:inline-block border border-neon text-neon px-5 py-2 text-xs tracking-[0.2em] hover:bg-neon hover:text-black transition-colors duration-300 btn-hard">REGISTER</a>
+        @endif
         <button id="menu-toggle" data-testid="mobile-menu-button" class="lg:hidden text-neon text-2xl leading-none" aria-label="Open menu">≡</button>
       </div>
     </div>
@@ -64,8 +68,12 @@
     <a href="#prizes" data-testid="mobile-link-prizes" class="nav-anchor mobile-link">PRIZES</a>
     <!-- <a href="#sponsors" data-testid="mobile-link-sponsors" class="nav-anchor mobile-link">SPONSORS</a> -->
     <a href="#faq" data-testid="mobile-link-faq" class="nav-anchor mobile-link">FAQ</a>
-    <a href="{{ route('payment') }}" data-testid="mobile-link-payment-verify" class="border border-white/25 text-gray-100 px-8 py-3">VERIFY PAYMENT</a>
-    <a href="{{ route('register') }}" data-testid="mobile-link-register" class="border border-neon text-neon px-8 py-3 mt-4">REGISTER</a>
+    @if ($siteSettings->paymentIsOpen())
+      <a href="{{ route('payment') }}" data-testid="mobile-link-payment-verify" class="border border-white/25 text-gray-100 px-8 py-3">VERIFY PAYMENT</a>
+    @endif
+    @if ($siteSettings->registrationIsOpen())
+      <a href="{{ route('register') }}" data-testid="mobile-link-register" class="border border-neon text-neon px-8 py-3 mt-4">REGISTER</a>
+    @endif
   </div>
 
   <!-- ================= HERO ================= -->
@@ -119,7 +127,11 @@
       </div>
 
       <div class="hero-fade mt-12 flex flex-wrap items-center gap-5" style="--d:1.1s">
-        <a href="{{ route('register') }}" data-testid="hero-register-btn" class="bg-neon text-black font-bold px-8 py-4 text-sm tracking-[0.2em] btn-hard">REGISTER YOUR TEAM</a>
+        @if ($siteSettings->registrationIsOpen())
+          <a href="{{ route('register') }}" data-testid="hero-register-btn" class="bg-neon text-black font-bold px-8 py-4 text-sm tracking-[0.2em] btn-hard">REGISTER YOUR TEAM</a>
+        @else
+          <p data-testid="hero-registration-closed" class="text-sm tracking-[0.15em] text-dim">REGISTRATION IS CLOSED</p>
+        @endif
         <!-- <a href="{{ route('payment') }}" data-testid="hero-payment-verify-btn" class="border border-white/25 px-8 py-4 text-sm tracking-[0.2em] text-gray-200 hover:border-neon hover:text-neon transition-colors duration-300 btn-hard">VERIFY PAYMENT</a> -->
         <a href="#segments" data-testid="hero-explore-btn" class="nav-anchor border border-white/20 px-8 py-4 text-sm tracking-[0.2em] text-gray-200 hover:border-cyber hover:text-cyber transition-colors duration-300">EXPLORE SEGMENTS →</a>
       </div>
@@ -192,7 +204,7 @@
                 <div><span class="block text-dim tracking-widest mb-1">FINALS</span>10 OCT</div>
                 <div><span class="block text-dim tracking-widest mb-1">FEE</span>৳1,000 / TEAM</div>
               </div>
-              <a href="{{ route('segment', ['s' => 'szpc']) }}" data-testid="segment-link-programming" class="seg-details">FULL RULES &amp; PRIZES →</a><button type="button" class="copy-link-btn" data-copy="{{ url('/register?c=szpc') }}" data-testid="copy-link-szpc">⧉ COPY REG LINK</button>
+              <a href="{{ route('segment', ['s' => 'szpc']) }}" data-testid="segment-link-programming" class="seg-details">FULL RULES &amp; PRIZES →</a>@if ($siteSettings->registrationIsOpen())<button type="button" class="copy-link-btn" data-copy="{{ url('/register?c=szpc') }}" data-testid="copy-link-szpc">⧉ COPY REG LINK</button>@endif
             </div>
           </div>
         </article>
@@ -212,7 +224,7 @@
                 <div><span class="block text-dim tracking-widest mb-1">FINALS</span>10 OCT</div>
                 <div><span class="block text-dim tracking-widest mb-1">FEE</span>৳500 / TEAM</div>
               </div>
-              <a href="{{ route('segment', ['s' => 'jpc']) }}" data-testid="segment-link-jpc" class="seg-details">FULL RULES &amp; PRIZES →</a><button type="button" class="copy-link-btn" data-copy="{{ url('/register?c=jpc') }}" data-testid="copy-link-jpc">⧉ COPY REG LINK</button>
+              <a href="{{ route('segment', ['s' => 'jpc']) }}" data-testid="segment-link-jpc" class="seg-details">FULL RULES &amp; PRIZES →</a>@if ($siteSettings->registrationIsOpen())<button type="button" class="copy-link-btn" data-copy="{{ url('/register?c=jpc') }}" data-testid="copy-link-jpc">⧉ COPY REG LINK</button>@endif
             </div>
           </div>
         </article>
@@ -232,7 +244,7 @@
                 <div><span class="block text-dim tracking-widest mb-1">FINALS</span>10 OCT</div>
                 <div><span class="block text-dim tracking-widest mb-1">FEE</span>৳100 / PERSON</div>
               </div>
-              <a href="{{ route('segment', ['s' => 'ithq']) }}" data-testid="segment-link-ithq" class="seg-details">FULL RULES &amp; PRIZES →</a><button type="button" class="copy-link-btn" data-copy="{{ url('/register?c=ithq') }}" data-testid="copy-link-ithq">⧉ COPY REG LINK</button>
+              <a href="{{ route('segment', ['s' => 'ithq']) }}" data-testid="segment-link-ithq" class="seg-details">FULL RULES &amp; PRIZES →</a>@if ($siteSettings->registrationIsOpen())<button type="button" class="copy-link-btn" data-copy="{{ url('/register?c=ithq') }}" data-testid="copy-link-ithq">⧉ COPY REG LINK</button>@endif
             </div>
           </div>
         </article>
@@ -467,8 +479,12 @@
           <li><a href="#prizes" data-testid="footer-link-prizes" class="nav-anchor hover:text-neon transition-colors duration-300">Prizes</a></li>
           <!-- <li><a href="#sponsors" data-testid="footer-link-sponsors" class="nav-anchor hover:text-neon transition-colors duration-300">Sponsors</a></li> -->
           <li><a href="#faq" data-testid="footer-link-faq" class="nav-anchor hover:text-neon transition-colors duration-300">FAQ</a></li>
-          <li><a href="{{ route('register') }}" data-testid="footer-link-register" class="hover:text-neon transition-colors duration-300">Register</a></li>
-          <li><a href="{{ route('payment') }}" data-testid="footer-link-payment-verify" class="hover:text-neon transition-colors duration-300">Verify payment</a></li>
+          @if ($siteSettings->registrationIsOpen())
+            <li><a href="{{ route('register') }}" data-testid="footer-link-register" class="hover:text-neon transition-colors duration-300">Register</a></li>
+          @endif
+          @if ($siteSettings->paymentIsOpen())
+            <li><a href="{{ route('payment') }}" data-testid="footer-link-payment-verify" class="hover:text-neon transition-colors duration-300">Verify payment</a></li>
+          @endif
         </ul>
       </div>
     </div>

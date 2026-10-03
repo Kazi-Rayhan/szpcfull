@@ -74,8 +74,12 @@
         <p class="mt-4 text-sm text-dim">Finals day: 10 October 2026 — University of Global Village, Barishal.</p>
 
         <div class="mt-10 flex flex-col sm:flex-row gap-4">
-          <a href="{{ route('register') }}" class="inline-flex justify-center bg-neon text-black font-bold py-3.5 px-6 text-sm rounded-lg btn-hard">Register another entry</a>
-          <a href="{{ route('payment') }}" class="inline-flex justify-center border border-white/25 px-6 py-3.5 text-sm font-medium rounded-lg text-gray-100 hover:border-neon hover:text-neon transition-colors duration-300">Payment lookup</a>
+          @if ($siteSettings->registrationIsOpen())
+            <a href="{{ route('register') }}" class="inline-flex justify-center bg-neon text-black font-bold py-3.5 px-6 text-sm rounded-lg btn-hard">Register another entry</a>
+          @endif
+          @if ($siteSettings->paymentIsOpen())
+            <a href="{{ route('payment') }}" class="inline-flex justify-center border border-white/25 px-6 py-3.5 text-sm font-medium rounded-lg text-gray-100 hover:border-neon hover:text-neon transition-colors duration-300">Payment lookup</a>
+          @endif
           <a href="{{ route('home') }}" class="inline-flex justify-center border border-white/25 px-6 py-3.5 text-sm font-medium rounded-lg text-gray-100 hover:border-neon hover:text-neon transition-colors duration-300">Back to main site</a>
         </div>
       </div>

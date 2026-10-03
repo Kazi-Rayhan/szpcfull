@@ -1,4 +1,4 @@
-@if ($registration->supportsBkashSelfPay() && ! $registration->is_paid)
+@if ($registration->supportsBkashSelfPay() && ! $registration->is_paid && $siteSettings->paymentIsOpen())
   @include('partials.ithq-bkash-instructions', [
     'referenceCode' => $registration->reference_code,
     'feeAmount' => $registration->contestFeeAmount(),
@@ -40,6 +40,19 @@
       {{ $registration->payment_transaction_id ? 'Update transaction ID' : 'Submit transaction ID' }}
     </button>
   </form>
+@elseif ($registration->supportsBkashSelfPay() && ! $registration->is_paid)
+  @if ($registration->payment_transaction_id)
+    <p class="mt-8 text-sm text-gray-200">
+      Transaction ID on file: <span class="font-mono text-neon">{{ $registration->payment_transaction_id }}</span>
+      @if ($registration->payment_submitted_at)
+        <span class="text-dim"> · submitted {{ $registration->payment_submitted_at->format('M j, Y g:i A') }}</span>
+      @endif
+    </p>
+  @endif
+  <div class="mt-6 border border-white/15 rounded-lg p-5 bg-surface/40 text-sm text-gray-200 leading-relaxed" data-testid="payment-closed">
+    <p class="text-neon text-sm font-medium mb-2">Payment closed</p>
+    <p>Online bKash payment is closed. The committee will still verify transaction IDs already on file.</p>
+  </div>
 @elseif (! $registration->is_paid)
   <div class="mt-8 border border-white/15 rounded-lg p-5 bg-surface/40 text-sm text-gray-200 leading-relaxed">
     <p class="text-neon text-sm font-medium mb-2">Registration fee</p>

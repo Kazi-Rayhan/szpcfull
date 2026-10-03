@@ -21,7 +21,6 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
 use Livewire\Attributes\Locked;
-use UnitEnum;
 
 class ManageSiteSeo extends Page
 {
@@ -78,6 +77,20 @@ class ManageSiteSeo extends Page
     {
         return $schema
             ->components([
+                Section::make('Registration & payment')
+                    ->description('Existing registrations stay in the admin. Payment status lookup stays available when new payments are closed.')
+                    ->schema([
+                        Toggle::make('registration_enabled')
+                            ->label('Accept new registrations')
+                            ->helperText('When off, the public registration form is closed and register buttons are hidden.')
+                            ->inline(false)
+                            ->default(true),
+                        Toggle::make('payment_enabled')
+                            ->label('Accept bKash payments')
+                            ->helperText('When off, teams cannot submit a transaction ID.')
+                            ->inline(false)
+                            ->default(true),
+                    ]),
                 Section::make('General')
                     ->columns(2)
                     ->schema([

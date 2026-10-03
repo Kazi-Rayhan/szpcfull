@@ -66,6 +66,16 @@
         </ol> -->
       </div>
 
+      @if (! $siteSettings->registrationIsOpen())
+        <div class="register-panel w-full max-w-none border-y sm:border border-white/20 bg-panel/80 backdrop-blur px-4 py-10 sm:p-8 lg:p-10" data-testid="registration-closed">
+          <p class="text-neon text-sm font-medium mb-3">Registration closed</p>
+          <h1 class="font-display font-800 text-3xl sm:text-4xl tracking-tight leading-tight">New entries are not being accepted</h1>
+          <p class="mt-6 text-sm text-dim leading-relaxed max-w-xl">The registration form is closed. If you already registered, use your reference code to check payment status.</p>
+          @if ($siteSettings->paymentIsOpen())
+            <a href="{{ route('payment') }}" class="mt-8 inline-flex border border-white/25 px-6 py-3 text-sm font-medium rounded-lg text-gray-100 hover:border-neon hover:text-neon transition-colors duration-300">Payment lookup</a>
+          @endif
+        </div>
+      @else
       <div class="register-panel w-full max-w-none border-y sm:border border-neon/40 bg-panel/80 backdrop-blur px-4 py-6 sm:p-8 lg:p-10">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start mb-12">
           <div>
@@ -117,6 +127,7 @@
           <button id="reg-again" data-testid="register-again-button" class="mt-8 border border-white/25 px-6 py-3 text-sm font-medium rounded-lg text-gray-100 hover:border-neon hover:text-neon transition-colors duration-300">Register another team</button>
         </div>
       </div>
+      @endif
     </div>
   </main>
 
@@ -128,12 +139,14 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script>
-  window.SZPC_REGISTER = {
-    storeUrl: @json(route('register.store')),
-    csrf: @json(csrf_token()),
-  };
-</script>
-  <script src="{{ asset('js/registration.js') }}?v={{ filemtime(public_path('js/registration.js')) }}"></script>
+  @if ($siteSettings->registrationIsOpen())
+    <script>
+      window.SZPC_REGISTER = {
+        storeUrl: @json(route('register.store')),
+        csrf: @json(csrf_token()),
+      };
+    </script>
+    <script src="{{ asset('js/registration.js') }}?v={{ filemtime(public_path('js/registration.js')) }}"></script>
+  @endif
 </body>
 </html>

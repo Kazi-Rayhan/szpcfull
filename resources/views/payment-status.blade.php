@@ -24,7 +24,9 @@
       </a>
       <div class="flex items-center gap-6">
         <a href="{{ route('payment') }}" class="text-xs tracking-[0.15em] text-dim hover:text-neon transition-colors">LOOKUP</a>
-        <a href="{{ route('register') }}" class="border border-white/20 px-5 py-2 text-xs tracking-[0.2em] text-gray-200 hover:border-neon hover:text-neon transition-colors duration-300">REGISTER</a>
+        @if ($siteSettings->registrationIsOpen())
+          <a href="{{ route('register') }}" class="border border-white/20 px-5 py-2 text-xs tracking-[0.2em] text-gray-200 hover:border-neon hover:text-neon transition-colors duration-300">REGISTER</a>
+        @endif
       </div>
     </div>
   </header>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LookupPaymentRequest;
 use App\Http\Requests\SubmitPaymentTransactionRequest;
 use App\Models\Registration;
+use App\Models\SiteSetting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -52,6 +53,12 @@ class PaymentController extends Controller
     {
         $code = strtoupper(trim($reference_code));
         $registration = Registration::where('reference_code', $code)->firstOrFail();
+
+        if (! SiteSetting::current()->paymentIsOpen()) {
+            return back()->withErrors([
+                'payment_transaction_id' => 'Online payment is closed.',
+            ]);
+        }
 
         if (! $registration->supportsBkashSelfPay()) {
             return back()->withErrors([
