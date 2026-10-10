@@ -75,6 +75,7 @@ const SEGMENTS = {
     ],
     prizes: [
       ['CHAMPION (PER CATEGORY)', ''],
+      ['CERTIFICATE FOR ALL PARTICIPANTS', ''],
     ],
   },
 
