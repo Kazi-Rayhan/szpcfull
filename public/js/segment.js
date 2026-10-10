@@ -74,10 +74,7 @@ const SEGMENTS = {
       ['10 OCT', 'Onsite final + combined prize giving'],
     ],
     prizes: [
-      ['CHAMPION (PER CATEGORY)', 'TROPHY'],
-      ['1ST RUNNER-UP (PER CATEGORY)', 'TROPHY'],
-      ['2ND RUNNER-UP (PER CATEGORY)', 'TROPHY'],
-      ['ALL PARTICIPANTS', 'CERTIFICATE'],
+      ['CHAMPION (PER CATEGORY)', ''],
     ],
   },
 
@@ -184,7 +181,7 @@ if (!seg) {
 
           <p class="reveal ${accentText} text-sm font-medium mt-16 mb-4" style="--d:.3s">Prizes & recognition</p>
           <div class="reveal border border-white/10" style="--d:.4s" data-testid="detail-prize-list">
-            ${seg.prizes.map(([r, a]) => `<div class="prize-row"><span class="tracking-[0.2em] text-xs">${r}</span><span class="font-display font-800 ${accentText}">${a}</span></div>`).join('')}
+            ${seg.prizes.map(([r, a]) => `<div class="prize-row"><span class="tracking-[0.2em] text-xs">${r}</span>${a ? `<span class="font-display font-800 ${accentText}">${a}</span>` : ''}</div>`).join('')}
           </div>
 
           <div class="reveal mt-14 flex flex-wrap items-center gap-5" style="--d:.5s">
