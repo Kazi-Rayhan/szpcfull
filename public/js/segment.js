@@ -74,7 +74,7 @@ const SEGMENTS = {
       ['10 OCT', 'Onsite final + combined prize giving'],
     ],
     prizes: [
-      ['CHAMPION (PER CATEGORY)', ''],
+      ['CHAMPION', ''],
       ['CERTIFICATE FOR ALL PARTICIPANTS', ''],
     ],
   },
