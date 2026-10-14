@@ -27,7 +27,9 @@ class ComingSoonTest extends TestCase
             ->assertSee('Coming soon')
             ->assertSee('gallery/one.jpeg', false)
             ->assertSee('gallery/two.jpeg', false)
-            ->assertSee('gallery/three.jpeg', false);
+            ->assertSee('gallery/three.jpeg', false)
+            ->assertSee('data-testid="boot-terminal"', false)
+            ->assertSee('University of Global Village');
     }
 
     public function test_old_public_pages_redirect_home(): void
